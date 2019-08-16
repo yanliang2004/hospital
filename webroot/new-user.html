@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		
+		#frm-headline {
+			font-size: 2em;
+			margin: 1em 0;
+			font-weight: normal;
+			text-align: center;
+		}
+		
+		
+		.form-group {
+			border-bottom: 1px solid #ddd;
+			line-height: 3em;
+			
+			display: flex;
+			justify-content: space-between;
+			
+		}
+		
+		label,
+		input {
+			font-size: 1em;
+		}
+		
+		label {
+			padding-right: 1em;
+		}
+		input {
+			height: 3em;
+			border: none;
+			outline: none;
+			text-align: right;
+			background-color:#FFF;
+			padding: 0;
+			
+			flex: auto;
+			min-width: 4em;
+		}
+		
+		.edit #pw {
+			flex: none;
+			text-align:center;
+			background-color:#eee;
+			cursor:pointer;
+		}
+		.edit #pw:hover {
+			background-color:#def;
+		}
+		.edit #pw:active {
+			background-color:#cdf;
+		}
+		
+		
+		#btn-save {
+			margin-top: 3em;
+			color: #fff; 
+			background-color: #adf;
+			cursor: pointer;
+			text-align: center;
+		}
+		#btn-save:hover {
+			background-color: #9df;
+		}
+		#btn-save:active {
+			background-color: #8ce;
+		}
+		
+		
+	</style>
+</head>
+<body>
+	
+	<form action="" id="frm-detail" class="edit">
+		
+		
+		<h2 id="frm-headline">新增用户</h2>
+		
+		<div class="form-group">
+			
+			<label for="name">姓名</label>
+			<input type="text" name="name" id="name" />
+			
+		</div>
+		
+		<div class="form-group">
+			
+			<label for="uname">登录名</label>
+			<input type="text" name="uname" id="uname" />
+			
+		</div>
+		
+		<div class="form-group" id="field-pw">
+			
+			<label for="pw">初始密码</label>
+			<input type="button" value="1234" id="pw" />
+			
+		</div>
+		
+		<div class="form-group">
+			
+			<label for="dept">科室</label>
+			<input type="text" name="dept" id="dept" list="dept-list" />
+			
+			<datalist id="dept-list">
+				<option value="心内科"></option>
+				<option value="心外科"></option>
+				<option value="呼吸科"></option>
+				<option value="胸外科"></option>
+				<option value="结核科"></option>
+				<option value="手术麻醉科"></option>
+				<option value="肿瘤内科"></option>
+				<option value="神经内科"></option>
+			</datalist>
+			
+		</div>
+		
+		<div class="form-group">
+			
+			<input type="button" value="保存" id="btn-save" />
+			
+		</div>
+		
+		
+		
+	</form>
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/new-user.js"></script>
+	
+</body>
+</html>

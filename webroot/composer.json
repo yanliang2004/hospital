@@ -1,0 +1,6 @@
+{
+    "require": {
+        "mongodb/mongodb": "^1.4",
+        "siriusphp/validation": "^2.2"
+    }
+}

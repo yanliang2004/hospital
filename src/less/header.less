@@ -1,0 +1,79 @@
+@import 'body';
+@import 'vars';
+
+.header {
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3em;
+    border-bottom:1px solid @header-line;
+    padding: 0 1em;
+    background-color:#FFF;
+    overflow:visible;
+	z-index: 99;
+}
+
+    #btn-user {
+        float:right;
+        width: 3em;
+        height: 3em;
+        line-height: 3em;
+        text-align:center;
+        color: @hlink-color; 
+        cursor:pointer;
+        
+        &:hover {
+            color: @hlink-color-hover;
+        }
+    }
+    
+
+    #user-menu {
+        display:none;
+        position:absolute;
+        left: 0;
+        top: 3em;
+        right: 0;
+        background-color:#FFF;
+        border-top:1px solid @header-line;
+		z-index: 999;
+		
+    }
+    
+        #user-menu a {
+            position:relative;
+            display:block;
+            padding: 0 2em;
+            text-decoration:none;
+            line-height: 3em;
+            color: @menu-color;
+            text-align: left;
+            border-bottom:1px dotted @header-line;
+            &:hover {
+                color: @menu-color-hover;
+                background-color: ;
+            }
+            
+            .fa {
+                float:right;
+                margin-top: 1em;
+            }
+            
+        }
+    
+    .info {
+        float:left;
+        text-decoration:none;
+        line-height: 3em;
+        padding: 0 0.5em;
+        text-align:center;
+    }
+
+    
+    
+        
+@media screen and (min-width: 40em) {
+	@import 'header-pc';
+}
+

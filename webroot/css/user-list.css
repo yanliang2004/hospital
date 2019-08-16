@@ -1,0 +1,361 @@
+html,
+body {
+  margin: 0;
+  font: 100% "Microsoft YaHei", "Heiti SC", Arial, sans-serif;
+  color: #136;
+  min-width: 15em;
+}
+.bg-dark {
+  background-color: #343a40;
+}
+.bg-light {
+  background-color: #f1f2f7;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3em;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 0 1em;
+  background-color: #FFF;
+  overflow: visible;
+  z-index: 99;
+}
+#btn-user {
+  float: right;
+  width: 3em;
+  height: 3em;
+  line-height: 3em;
+  text-align: center;
+  color: #99abb4;
+  cursor: pointer;
+}
+#btn-user:hover {
+  color: #627985;
+}
+#user-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 3em;
+  right: 0;
+  background-color: #FFF;
+  border-top: 1px solid #dcdcdc;
+  z-index: 999;
+}
+#user-menu a {
+  position: relative;
+  display: block;
+  padding: 0 2em;
+  text-decoration: none;
+  line-height: 3em;
+  color: #607d8b;
+  text-align: left;
+  border-bottom: 1px dotted #dcdcdc;
+}
+#user-menu a:hover {
+  color: #03a9f3;
+  background-color: ;
+}
+#user-menu a .fa {
+  float: right;
+  margin-top: 1em;
+}
+.info {
+  float: left;
+  text-decoration: none;
+  line-height: 3em;
+  padding: 0 0.5em;
+  text-align: center;
+}
+@media screen and (min-width: 40em) {
+  #user-menu {
+    left: auto;
+    width: 15em;
+  }
+}
+/* mobile first */
+#main-panel {
+  margin-top: 3em;
+}
+#list {
+  color: #777;
+}
+.list-header {
+  position: relative;
+  height: 3em;
+  padding: 0 1em;
+  border-bottom: 1px solid #e8e9ed;
+  background-color: #FFF;
+}
+.list-header a {
+  position: absolute;
+  width: 3em;
+  height: 3em;
+  line-height: 3em;
+  text-align: center;
+  cursor: pointer;
+}
+.list-header a:hover {
+  color: #03a9f3;
+  background-color: #eee;
+}
+#a-toggle-all {
+  right: 0;
+}
+#a-add-user {
+  left: 0;
+}
+.ico-toggle-all,
+.ico-add-user {
+  display: inline-block;
+  font-size: 0.625em;
+  transition: transform 100ms;
+}
+.collapsed .ico-toggle-all {
+  transform: rotate(180deg);
+}
+.dept {
+  line-height: 3em;
+  border-bottom: 1px solid #e8e9ed;
+}
+.dept-header {
+  padding: 0 1em;
+  position: relative;
+}
+.a-toggle {
+  position: absolute;
+  width: 3em;
+  height: 3em;
+  right: 0;
+  text-align: center;
+  cursor: pointer;
+}
+.a-toggle:hover {
+  color: #03a9f3;
+  background-color: #eee;
+}
+.ico-toggle {
+  display: inline-block;
+  font-size: 0.625em;
+  transition: transform 100ms;
+}
+.collapsed .ico-toggle {
+  transform: rotate(180deg);
+}
+.users {
+  background-color: #FbFcFe;
+}
+.dept.collapsed .users {
+  display: none;
+}
+.a-user {
+  display: block;
+  text-decoration: none;
+  border-top: 1px dotted #ddd;
+  padding: 0 1em;
+  cursor: pointer;
+  color: #777;
+}
+.a-user:hover {
+  color: #03a9f3;
+  background-color: #eee;
+}
+.a-user b {
+  font-weight: normal;
+}
+.uname {
+  float: right;
+}
+#frm-user {
+  margin: 0;
+  padding: 1em;
+}
+#detail-hl {
+  font-weight: normal;
+  margin: 1em 0;
+  text-align: center;
+}
+.form-group {
+  margin: 1em 0;
+}
+label,
+input,
+button,
+select {
+  display: block;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+.field-title {
+  height: 1.5em;
+  line-height: 1.5em;
+}
+.field-msg {
+  height: 1.5em;
+  line-height: 1.5em;
+  text-align: right;
+}
+.field-msg.valid:before {
+  content: 'OK';
+  color: #696;
+}
+.error {
+  color: #c33;
+}
+.input-field.error {
+  border-color: #c33;
+}
+input,
+button,
+select {
+  height: 3em;
+  min-width: 5em;
+  border: 1px solid #ccc;
+  padding: 0 0.5em;
+  width: 100%;
+  box-sizing: border-box;
+}
+#reset-pw {
+  background-color: #fff;
+  border: 0;
+  font-size: 1.5em;
+  height: 2em;
+  cursor: default;
+  outline: 0;
+  text-align: left;
+  padding: 0 0.25em;
+}
+#reset-pw.active {
+  background-color: #eee;
+  min-width: 6em;
+  text-align: center;
+  cursor: pointer;
+}
+#reset-pw.active:hover {
+  background-color: #ccc;
+}
+#reset-pw.active:active {
+  background-color: #888;
+  color: #fff;
+}
+#btn-save,
+#a-back {
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+#btn-save:hover,
+#a-back:hover {
+  background-color: #ccc;
+}
+#btn-save:active,
+#a-back:active {
+  background-color: #888;
+  color: #fff;
+}
+#btn-save {
+  margin-top: 3em;
+}
+#a-back {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  margin-top: 1em;
+  line-height: 3em;
+}
+#detail-panel {
+  display: none;
+}
+@media screen and (min-width: 40em) {
+  #main-panel {
+    position: absolute;
+    width: 18em;
+    left: 0;
+    top: 3em;
+    bottom: 0;
+    margin-top: 0;
+  }
+  #list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .list-header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 3em;
+  }
+  .list-body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 3em;
+    bottom: 0;
+    overflow-y: scroll;
+  }
+  #detail-panel {
+    position: absolute;
+    display: block;
+    background-color: #f1f2f7;
+    left: 18em;
+    right: 0;
+    top: 3em;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 1.5em;
+    min-width: 22em;
+  }
+  #frm-user {
+    background-color: #FFF;
+    padding: 2em;
+    min-width: 27em;
+  }
+  #detail-hl {
+    text-align: left;
+  }
+  .form-group {
+    position: relative;
+    line-height: 2.5em;
+  }
+  input,
+  button,
+  label,
+  select {
+    display: inline-block;
+  }
+  .field-title {
+    width: 5em;
+  }
+  .input-field {
+    height: 2.5em;
+    text-align: left;
+    padding: 0 0.5em;
+    width: 20em;
+  }
+  #dept {
+    direction: ltr;
+  }
+  #reset-pw {
+    width: 20em;
+  }
+  #btn-save,
+  #reset-pw,
+  #a-back {
+    display: inline-block;
+    height: 2.5em;
+    line-height: 2.5em;
+  }
+  #btn-save,
+  #a-back {
+    width: 12.5em;
+    margin: 0;
+  }
+}

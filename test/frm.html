@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	
+	<style type="text/css">
+		label, input {
+			display:block;
+		}
+		#toggle-edit {
+			display:inline-block;
+		}
+	</style>
+	
+</head>
+<body>
+	
+	<form id="frm-user">
+		
+		<label for="toggle-edit">
+			编辑
+			<input type="checkbox" id="toggle-edit" />
+		</label>
+		
+		<label for="name">姓名</label>
+		<input type="text" id="name" />
+		
+		<label for="dept">科室</label>
+		<input type="text" id="dept" />
+		
+		<button id="btn-save">保存</button>
+		
+	</form>
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/frm.js"></script>
+	
+</body>
+</html>

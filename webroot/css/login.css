@@ -1,0 +1,75 @@
+html,
+body {
+  margin: 0;
+  font: 100% "Microsoft YaHei", "Heiti SC", Arial, sans-serif;
+  color: #136;
+  min-width: 20em;
+}
+.bg-dark {
+  background-color: #343a40;
+}
+.bg-light {
+  background-color: #f1f2f7;
+}
+#frm-login {
+  margin: 2em 1em 1em;
+  padding: 2em;
+  background-color: #fff;
+}
+#form-title {
+  font-size: 2em;
+  font-weight: normal;
+  margin: 0;
+  text-align: center;
+  padding: 0 0 1em;
+  color: #777;
+}
+.form-group {
+  padding-bottom: 2.5em;
+}
+label,
+input,
+button {
+  display: block;
+  font: 1em sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+label {
+  color: #878787;
+}
+input {
+  height: 3em;
+  margin: 0.5em 0 0.3em;
+}
+input.error {
+  border-color: #dc3545;
+  outline: none;
+}
+label.error {
+  color: #dc3545;
+  position: absolute;
+  font-size: 0.8em;
+}
+button {
+  height: 3em;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+#btn-login {
+  background-color: #28a745;
+}
+#btn-login:hover {
+  background-color: #218838;
+}
+#btn-login:active {
+  background-color: #1e7e34;
+}
+@media screen and (min-width: 40em) {
+  #frm-login {
+    max-width: 34em;
+    margin: 2em auto 1em;
+  }
+}

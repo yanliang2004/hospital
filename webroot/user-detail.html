@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		
+		.form-group {
+			line-height: 3em;
+			border-bottom:1px solid #ddd;
+			display: flex;
+			justify-content: space-between;
+		}
+			input,
+			label {
+				font-size: 1em;
+				
+			}
+			
+			input {
+				min-width: 4em;
+				text-align:right;
+				border:none;
+				outline:none;
+				flex: auto;
+			}
+			
+			input[type="text"] {
+				background-color:#FFd;
+			}
+			input[type="text"][readonly] {
+				background-color:#FFF;
+			}
+			
+			.headline {
+				font-size: 2em;
+				text-align: center;
+				height: 3em;
+			}
+			
+			#reset-pw {
+				text-align: center;
+				flex: none;
+				cursor:pointer;
+			}
+			#reset-pw:hover {
+				background-color:#ccc;
+			}
+			#reset-pw:active {
+				background-color:#999;
+				color:#fff;
+			}
+		
+	</style>
+</head>
+<body>
+	
+	<form action="" method="post" id="user-detail">
+	
+		<div class="form-group">
+			<input type="text" name="name" id="name" class="headline" value="王磊" />
+		</div>
+		
+		<div class="form-group">
+			
+			<label for="uname">登录名</label>
+			<input type="text" name="uname" id="uname" value="wanglei" />
+			
+		</div>
+		
+		<div class="form-group">
+			
+			<label for="reset-pw">密码</label>
+			<input type="button" name="reset-pw" id="reset-pw" value="重置为 1234" />
+			
+		</div>
+		
+		<div class="form-group">
+			
+			<label for="dept">科室</label>
+			<input type="text" name="dept" id="dept" value="心内科" />
+			
+		</div>
+		
+		
+		
+	</form>
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/user-detail.js"></script>
+	
+</body>
+</html>

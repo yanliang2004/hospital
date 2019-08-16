@@ -1,0 +1,252 @@
+@import 'body';
+@import 'header';
+
+/* mobile first */
+
+#main-panel {
+    margin-top: 3em;
+}
+
+    #list {
+        color:#777;
+    }
+    
+        .list-header {
+            position:relative;
+            height: 3em;
+            padding: 0 1em;
+			border-bottom:1px solid #e8e9ed;
+			background-color:#FFF;
+        }
+			
+			.list-header a {
+				position:absolute;
+				width: 3em;
+				height: 3em;
+				line-height: 3em;
+				text-align:center;
+				cursor:pointer;
+				
+				&:hover {
+					color: #03a9f3;
+					background-color: #eee;
+				}
+				
+			}
+			
+			#a-toggle-all {
+				right: 0;
+			}
+			#a-add-user {
+				left: 0;
+			}
+			
+                .ico-toggle-all,
+				.ico-add-user {
+                    display:inline-block;
+                    font-size: 0.625em;
+                    transition: transform 100ms;
+                }
+                
+                .collapsed .ico-toggle-all {
+                    transform: rotate(180deg);
+                }
+
+			
+            .list-body {
+                
+            }
+                
+                .dept {
+                    line-height: 3em;
+					border-bottom: 1px solid #e8e9ed;
+                }
+                
+                    .dept-header {
+                        padding: 0 1em;
+                        position:relative;
+                    }
+                        
+                        .dept-name {
+                            
+                        }
+                        
+                        .a-toggle {
+                            position:absolute;
+                            width: 3em;
+                            height: 3em;
+                            right: 0;
+                            text-align:center;
+                            cursor:pointer;
+                        }
+                        .a-toggle:hover {
+                            color:#03a9f3;
+                            background-color:#eee;
+                        }
+                            .ico-toggle {
+                                display:inline-block;
+                                font-size: 0.625em;
+                                transition: transform 100ms;
+                            }
+                            .collapsed .ico-toggle {
+                                transform: rotate(180deg);
+                            }
+                            
+                    
+                    .users {
+						background-color:#FbFcFe;
+
+                    }
+					.dept.collapsed .users {
+						display: none;
+					}
+					
+                    
+                        .a-user {
+                            display:block;
+                            text-decoration:none;
+                            cursor:pointer;
+                            border-top:1px dotted #ddd;
+                            padding: 0 1em;
+                            cursor:pointer;
+							color:#777;
+                        }
+                        .a-user:hover {
+                            color:#03a9f3;
+                            background-color:#eee;
+                        }
+                            
+                            .a-user b {
+                                font-weight:normal;
+                            }
+                            .uname {
+                                float:right;
+                            }
+    
+	#detail {
+		
+	}
+		#frm-user {
+			margin: 0;
+			padding: 1em;
+		}
+			
+			#detail-hl {
+				font-weight:normal;
+				margin: 1em 0;
+				text-align:center;
+			}
+			
+			.form-group {
+				margin: 1em 0;
+			}
+		
+			label,
+			input,
+			button,
+			select {
+				display: block;
+				font-size: 1em;
+				box-sizing: border-box;
+			}
+
+			.field-title {
+				height: 1.5em;
+				line-height: 1.5em;
+			}
+
+			.field-msg {
+				height:  1.5em;
+				line-height:  1.5em;
+				text-align: right;
+			}
+			.field-msg.valid:before {
+				content: 'OK';
+				color: #696;
+			}
+
+			.error {
+				color: #c33;
+			}
+			.input-field.error {
+				border-color: #c33;
+			}
+			
+			input,
+			button,
+			select {
+				height: 3em;
+				min-width: 5em;
+				border: 1px solid #ccc;
+				padding: 0 0.5em;
+				width: 100%;
+				box-sizing: border-box;
+			}
+			#reset-pw {
+				background-color: #fff;
+				border: 0;
+				font-size: 1.5em;
+				height: 2em;
+				cursor: default;
+				outline: 0;
+				text-align: left;
+				padding: 0 0.25em;
+			}
+			#reset-pw.active {
+				background-color:#eee;
+				min-width: 6em;
+				text-align:center;
+				cursor:pointer;
+				&:hover {
+					background-color:#ccc;
+				}
+				&:active {
+					background-color:#888;
+					color:#fff;
+				}
+			}
+
+			#dept {
+				
+			}
+			
+			#btn-save,
+			#a-back {
+				text-align:center;
+				background-color:#eee;
+				border: 1px solid #ccc;
+				cursor:pointer;
+				&:hover {
+					background-color:#ccc;
+				}
+				&:active {
+					background-color:#888;
+					color:#fff;
+				}
+			}
+
+			#btn-save {
+				margin-top: 3em;
+			}
+			#a-back {
+				display: block;
+				color: #000;
+				text-decoration: none;
+				margin-top: 1em;
+				line-height: 3em;
+			}
+			
+	
+                
+#detail-panel {
+    display:none;
+}
+
+@media screen and (min-width: 40em) {
+	@import 'user-list-pc.less';
+}
+
+
+
+
+

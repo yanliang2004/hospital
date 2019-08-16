@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <script src="js/jsencrypt.js"></script>
+
+        <script>
+            
+            var crypt = new JSEncrypt();
+
+            crypt.setKey(`-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAtAJp/KLD5kelgzg/wjPUpt6wq3ejtZwAZM6DkVAauseeIKUH
+t7Q0LWC9vwtwgg/NCV7wQTRVC9iOQCghQgw6cWc7EaoUc1PirvTjCZ26R85PwcAR
+D/TUcTDd8ijasjQuZUpsPzZi8liiHik+29qL+IPnt2hosdoTa8+EJlL0fInSJeph
+rQFMxobV6PeEWalXdPRa6ErvJLoosni3rZj2TOivrBIzzq/6okXVYOULEAAF0o3E
+OMnk4Q64/YTPZBZFoDT9buhQp6d8SMp/WCtC4EreLiFjPNPvUGT091GS5IhEnmqt
+O5msN1wZpoh1ZLGkykYJmXYMKTgAW3r1RF4rTwIDAQABAoIBAD7YGOh6aqoamU4W
+dSv3rGYVmNhEDIN60yhecNBqhupuhmYfN3KLFyxAef4YoE7H9W0wF/CrtIVONVtw
+pyvH2R9+SsD//+PDhYBPPnQ8/KvU+0NJKqvHbeOWi+XfHXrZfNkgAmqPMjwpdW/S
+Nn/K7NL2Og9uBB8TY3RgHmLC01gmr0QQUvVh6w9yoiTLJRmpDoOl2tG7mF6/9xt+
+ZFKni+2QljFV0pHnkmMpXuGdmZ4487wKY7jNvk1Z3J+EnDM+P6IHGe7U+B2LUg+x
+/o61dNCCEqjGRCQq0w7M3s0Lcym1PMgGqIoKAN1/pOf9zamTL8c8lqnY2itG0B9N
+AFdOuQECgYEA56dHl5LAJu3kECpCDSV/rrte1xfmZ4Ex6hRuDDczYgyGyMhgtUcX
+/JUAn1xUIG9Sfm4Ua2kblyYOeerSrVd8Z14ZoOqB5vfZ5XpujY+kjwCHNJ+ckn38
+a/ia/IzU3AgFQSTX8Vv/JHp9tnBlK/2NwlXaBZQMqoUgNvXkszdJW90CgYEAxu2i
+LIAQF1SLTYntkUl8oiNWKJuCfgjxn1boqGhM49vPx1w4EwfWmgm8xi+SC0GWxXT3
+BbW02RBNeMq3MYlDAsaBzny25QEKSBe2Xp7E9mc0xKWDPR2ONm9rpzVh29xq88Bt
+T+p+1sf2WXV7H23u9//rgIw4SOPQOtPlY6ipNxsCgYBLe8OlTUlVphC5f7uUIxLu
+8dkeh4gpU/zaxJtzWY1htqk4xapVh3v2busMAn7bLssXrXDz6wT1hI4VBgJuP2Kn
+IA+D0sZPZ5XV48YgVJ0Ph+GGsTfIuErHN/PwtUcrB2YG6yV+XTbPQSaziv48jlth
+5q2rQam66rQrlIZYK3y49QKBgHTnXfDs6YfsZVkR/4zsNNRME+wVR6CtvOE4/81I
+TjdyDC9KoKF+b71ij4+gkSEQUHyF+k1etYMCs6SS7QmtcrYE1m/0lr8J13L6jHAa
+ugFcMYSHCBM4dUTEQe2nz3SXmjrZEORwGE48gSedhNe5kUApI8sNnF4pk0ufDyV8
+DsWVAoGAPqbrxf4M+//N6TecC7egAhbpwIsJcKxabXfXvrhZ110Iqr7FDXJE6ANL
+z8WcNxckxYhcVGhovjzHU/dhP8KbYt39/wPSlapOMOtX0u1WG+UwS7A3kOiZiAZ9
+g5L4cBTlte5Mk1fzckUcKubn0RQPcik72ab6GMzBXwCcSvvYZYQ=
+-----END RSA PRIVATE KEY-----`);
+
+            var code = crypt.encrypt('0000');
+
+            var plain  = crypt.decrypt(code);
+
+            console.log(plain);
+
+        </script>
+    </body>
+</html>

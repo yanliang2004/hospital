@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/frm-user.css">
+</head>
+<body>
+    
+
+    <form id="frm-user">
+
+        <h3 id="hl-frm">添加用户</h3>
+
+        <div class="form-group">
+            <label class="field-title" for="name">姓名</label>
+            <input class="field-input" type="text" name="name" id="name" size="4" required data-msg="请输入姓名">
+            <label for="name" class="field-msg error" id="msg-name">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label class="field-title" for="uname">登录名</label>
+            <input class="field-input" type="text" name="uname" id="uname" size="4" required data-msg="请输入登录名">
+            <label for="uname" class="field-msg error" id="msg-uname">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <select name="dept" id="dept" required data-msg="请选择科室">
+                <option value="1">心外科</option>
+                <option value="2">心内科</option>
+                <option value="3">呼吸科</option>
+                <option value="4">胸外科</option>
+                <option value="5">结核科</option>
+                <option value="6">手术麻醉科</option>
+                <option value="7">门诊医技</option>
+                <option value="8">肿瘤内科</option>
+                <option value="9">神经内科</option>
+                <option value="10">疼痛科</option>
+                <option value="11">内分泌科</option>
+                <option value="12">骨科</option>
+            </select>
+            <label for="dept" class="field-msg error" id="msg-dept"></label>
+        </div>
+
+        <button id="btn-save">保存</button>
+
+    </form>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/frm-user.js"></script>
+
+</body>
+</html>

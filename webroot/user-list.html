@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title></title>
+	
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	
+	<link rel="stylesheet" type="text/css" href="css/themify-icons.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/user-list.css" media="all" />
+</head>
+<body>
+	
+    <div id="header" class="header">
+        
+		<a id="btn-user"><i class="fa fa-user-o"></i></a>
+		
+		<div id="user-menu">
+			
+			<a href="#user-info" id="a-user-info">
+				用户信息
+				<i class="fa fa-user-circle-o"></i>
+			</a>
+			<a href="#change-pw" id="a-change-pw">
+				修改密码
+				<i class="fa fa-pencil"></i>
+			</a>
+			
+			<a href="#logout" id="a-logout">
+				退出登录
+				<i class="fa fa-sign-out"></i>
+			</a>
+			
+		</div>
+		
+		<a id="user" class="info"></a>
+		<a id="dept" class="info"></a>
+		
+        
+    </div>
+    
+    <!-- always shows, small or wide screens -->
+    <div id="main-panel">
+        
+        
+        <div id="list">
+            
+            <div class="list-header">
+                
+                <a id="a-toggle-all" ><i class="ti-angle-double-up ico-toggle-all"></i></a>
+                
+				<a id="a-add-user" href="#!page=user:new"><i class="ti-plus ico-add-user"></i></a>
+				
+            </div>
+            
+            <div class="list-body" id="list-body">
+            
+                <div class="dept" id="dept-tmpl">
+                    <div class="dept-header">
+                        <b class="dept-name">心内科</b>
+                        <a class="a-toggle"><i class="ti-angle-up ico-toggle"></i></a>
+                    </div>
+                    <div class="users">
+                        
+                        <a class="a-user" id="user-tmpl">
+                            <b class="name">张强</b>
+                            <b class="uname">zhangqiang</b>
+                        </a>
+                        
+                    </div>
+                </div>
+            
+            </div>
+            
+        </div>
+        
+        
+        <div id="detail">
+			
+			<form method="post" id="frm-user" readonly>
+				
+				<h2 id="detail-hl"></h2>
+				
+				<div class="form-group">
+					<label class="field-title" for="name">姓名</label>
+					<input type="text" class="input-field" name="name" id="name" required title="请输入姓名" />
+					<label for="name" class="field-msg error"></label>
+				</div>
+				
+				<div class="form-group">
+					<label class="field-title" for="uname">登录名</label>
+					<input type="text" class="input-field" name="uname" id="uname" required title="请输入登录名" />
+					<label for="uname" class="field-msg error"></label>
+				</div>
+				
+				<div class="form-group">
+					<label class="field-title" id="label-reset-pw">密码</label>
+					<button type="button" id="reset-pw" >重置为1234</button>
+				</div>
+				
+				<div class="form-group">
+					<label class="field-title" for="dept">科室</label>
+					<select class="input-field" id="dept" name="dept" required title="请选择科室">
+						<option value="1">心内科</option>
+						<option value="2">心外科</option>
+						<option value="3">呼吸科</option>
+						<option value="4">胸外科</option>
+						<option value="5">结核科</option>
+						<option value="6">手术麻醉科</option>
+						<option value="7">门诊医技</option>
+						<option value="8">肿瘤内科</option>
+						<option value="9">神经内科</option>
+						<option value="10">疼痛科</option>
+						<option value="11">内分泌科</option>
+						<option value="12">骨科</option>
+					</select>
+					<label for="uname" class="field-msg error"></label>
+				</div>
+				
+				<div class="form-group">
+					
+					<button id="btn-save">保存</button>
+					<a href="#page=list" id="a-back">放弃</a>
+					
+				</div>
+
+				
+			</form>
+			
+			
+		</div>
+        
+		
+		
+		
+    </div>
+    
+    <!-- shows only when in wide screen -->
+    <div id="detail-panel">
+        
+        
+        
+    </div>
+    
+    
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/datalist-polyfill.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery.uriAnchor.js"></script>
+    <script type="text/javascript" src="js/mock-min.js"></script>
+    <script type="text/javascript" src="js/mock-data.js"></script>
+    <script type="text/javascript" src="js/user-list.js"></script>
+    
+</body>
+
+</html>

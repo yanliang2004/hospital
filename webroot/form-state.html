@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+        form * {
+            display: block;
+            
+        }
+
+        input, button {
+            width: 20em;
+            height: 2.5em;
+            margin-bottom: 1em;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <form id="frm-user">
+
+        <label for="name">姓名</label>
+        <input type="text" name="name" id="name">
+
+        <label for="uname">登录名</label>
+        <input type="text" name="uname" id="uname">
+
+        <label for="dept">科室</label>
+        <input type="text" name="dept" id="dept">
+
+
+        <button id="btn-save">保存</button>
+    </form>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/form-state.js"></script>
+
+</body>
+</html>
