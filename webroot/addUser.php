@@ -84,6 +84,3 @@ function getValResult($validator) {
 }
 
 main();
-
-
-?>

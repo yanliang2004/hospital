@@ -26,6 +26,26 @@ class User
         return $docNextId->value;
     }
 
+    public static function resetPw($id)
+    {
+        $col = self::getCol('hospital', 'users');
+
+
+
+        $user = $col->findOne(
+            ['_id' => $id],
+            ['projection' => ['_id' => 0, 'uname' => 1]]
+        );
+
+
+        $pwh = md5("$user->uname:1234");
+
+        $col->updateOne(
+            ['_id' => $id],
+            ['$set' => ['pwh' => $pwh]]
+        );
+    }
+
     public static function getCol($db, $col)
     {
         $cli = self::getCli();
@@ -35,18 +55,15 @@ class User
 
     public static function getCli()
     {
-        $uri = 'mongodb://127.0.0.1';
+        $uri = 'mongodb://127.0.0.1/hospital';
 
         $uriOpt = [
-            'username' => '',
-            'password' => ''
+            'username' => 'admin',
+            'password' => 'admin'
         ];
 
-        return new MongoDB\Client($uri);
-
+        return new MongoDB\Client($uri, $uriOpt);
     }
-    
-
 }
 
 function testInc()
@@ -55,8 +72,8 @@ function testInc()
     $cli = User::getCli();
 
     $res = $cli->hospital->users->updateOne(
-        [ '_id' => 'nextId' ],
-        [ '$inc' => [ 'value' => 1 ] ]
+        ['_id' => 'nextId'],
+        ['$inc' => ['value' => 1]]
     );
 
     var_dump($res);
@@ -70,5 +87,3 @@ function test()
 }
 
 // test();
-
-?>

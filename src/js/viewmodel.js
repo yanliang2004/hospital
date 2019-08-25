@@ -29,9 +29,10 @@ $.extend(ViewModel.prototype, {
 
     },
 
+    // private method
     _notifyChange: function (key, value, ignore) {
 
-        $.each(this.observers, function(i, observer) {
+        $.each(this.observers, function (i, observer) {
             if (ignore != observer) {
                 observer.update(key, value);
             }

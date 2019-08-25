@@ -1,4 +1,6 @@
-function PwField ($btn, $label) {
+
+
+function PwField($btn, $label) {
     this.$btn = $btn;
     this.$label = $label;
 
@@ -6,6 +8,15 @@ function PwField ($btn, $label) {
     this.stateEdit = initStateEdit($btn, $label);
 
     this.setStateNew();
+
+    var state = this.state;
+
+    this.$btn.click(function (e) {
+
+        state.onclick(e);
+
+    });
+
 
 }
 
@@ -23,6 +34,10 @@ function initStateNew($btn, $label) {
         },
 
         unfreeze: function () {
+            // no operation
+        },
+
+        onclick: function (e) {
             // no operation
         }
 
@@ -46,6 +61,12 @@ function initStateEdit($btn, $label) {
         unfreeze: function () {
             $btn.prop('disabled', false);
         },
+
+        // reset pw
+        onclick: function () {
+
+        }
+
 
     };
 }
