@@ -7,5 +7,3 @@ require_once 'session.php';
 $nonce = refreshNonce();
 
 echo json_encode(['nonce'=>$nonce]);
-
-?>

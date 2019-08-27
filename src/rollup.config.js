@@ -5,5 +5,12 @@ export default [
 			file: '../webroot/js/user-list.js',
 			format: 'iife'
 		}
+	},
+	{
+		input: 'js/login.js',
+		output: {
+			file: '../webroot/js/login.js',
+			format: 'iife'
+		}
 	}
 ];

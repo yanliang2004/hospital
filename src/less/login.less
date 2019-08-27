@@ -17,14 +17,14 @@
 }
 
 .form-group {
-    padding-bottom: 2.5em;
+    margin: 1em 0;
 }
 
 label, input, button {
-    display:block;
+    display: block;
     font: 1em sans-serif;
     width: 100%;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 label {
@@ -32,17 +32,24 @@ label {
 }
 
 input {
-    height:3em;
-    margin: 0.5em 0 0.3em;
+    height: 3em;
 }
 input.error {
     border-color: #dc3545;
-    outline:none;
+    outline: none;
 }
 label.error {
     color: #dc3545;
-    position:absolute;
-    font-size: 0.8em;
+}
+.field-msg {
+    height: 1.5em;
+    line-height: 1.5em;
+}
+label.valid {
+    color: #396;
+    &:before {
+        content: 'OK';
+    }
 }
 
 button {

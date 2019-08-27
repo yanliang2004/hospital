@@ -86,25 +86,30 @@
 	};
 
 	var Data = {
-	    
+
 	    getDeptUserList: function (fn) {
-	    	$.getJSON('dept-user-list.php', function (data) {
-	    		fn(data);
-	    	});
-	    },
-	    
-	    getUser: function (id, fn) {
-	    	$.getJSON('user.php', {id: id}, function (data) {
+	        $.getJSON('dept-user-list.php', function (data) {
 	            fn(data);
-	    	});
+	        });
 	    },
-	    
+
+	    getUser: function (id, fn) {
+	        $.getJSON('user.php', { id: id }, function (data) {
+	            fn(data);
+	        });
+	    },
+
 	    saveUser: function (userData, fn) {
-	        
-	        $.post('addUser.php', userData, function(data) {
+
+	        $.post('addUser.php', userData, function (data) {
 	            fn(data);
 	        });
 
+	    },
+
+	    // reset pw to 1234
+	    resetPw: function (id, fn) {
+	        $.post('resetPw.php', { id: id }, fn);
 	    },
 
 	};
@@ -306,7 +311,7 @@
 		listPage.init();
 	});
 
-	function PwField ($btn, $label) {
+	function PwField($btn, $label) {
 	    this.$btn = $btn;
 	    this.$label = $label;
 
@@ -314,6 +319,15 @@
 	    this.stateEdit = initStateEdit($btn, $label);
 
 	    this.setStateNew();
+
+	    var state = this.state;
+
+	    this.$btn.click(function (e) {
+
+	        state.onclick(e);
+
+	    });
+
 
 	}
 
@@ -331,6 +345,10 @@
 	        },
 
 	        unfreeze: function () {
+	            // no operation
+	        },
+
+	        onclick: function (e) {
 	            // no operation
 	        }
 
@@ -354,6 +372,12 @@
 	        unfreeze: function () {
 	            $btn.prop('disabled', false);
 	        },
+
+	        // reset pw
+	        onclick: function () {
+
+	        }
+
 
 	    };
 	}

@@ -3,7 +3,7 @@ body {
   margin: 0;
   font: 100% "Microsoft YaHei", "Heiti SC", Arial, sans-serif;
   color: #136;
-  min-width: 20em;
+  min-width: 15em;
 }
 .bg-dark {
   background-color: #343a40;
@@ -25,7 +25,7 @@ body {
   color: #777;
 }
 .form-group {
-  padding-bottom: 2.5em;
+  margin: 1em 0;
 }
 label,
 input,
@@ -40,7 +40,6 @@ label {
 }
 input {
   height: 3em;
-  margin: 0.5em 0 0.3em;
 }
 input.error {
   border-color: #dc3545;
@@ -48,8 +47,16 @@ input.error {
 }
 label.error {
   color: #dc3545;
-  position: absolute;
-  font-size: 0.8em;
+}
+.field-msg {
+  height: 1.5em;
+  line-height: 1.5em;
+}
+label.valid {
+  color: #396;
+}
+label.valid:before {
+  content: 'OK';
 }
 button {
   height: 3em;
