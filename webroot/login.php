@@ -34,7 +34,7 @@ else
 
 // 1 - no user, 2 - wrong pw
 function loginFail($type) {
-    echo json_encode(['result'=>$type]);
+    echo json_encode(['code'=>$type]);
 
     exit();
 }
@@ -43,7 +43,7 @@ function loginSuccess($row) {
     
     loginUser($row);
     
-    echo json_encode(['result'=>0]);
+    echo json_encode(['code'=>0]);
 
     exit();
 }

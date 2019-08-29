@@ -69,12 +69,29 @@
         $lblUname = $('label[for="uname"]'),
         $lblPw = $('label[for="pw"]');
 
+    // 可以提交时，调用此函数：
+    var fnLogin;
+
     var validator = $frmLogin.validate({
         success: 'valid',
         submitHandler:  function (form) {
-            
+
+            console.log('submitting login');
+
+            fnLogin(form.uname.value, form.pw.value);
         }
     });
+
+    function onLogin(fn) {
+
+        fnLogin = fn;
+
+    }
+
+
+    var form = {
+        onLogin: onLogin
+    };
 
     init$1();
 
@@ -85,6 +102,8 @@
         });
 
         loginObj.init(ajaxLogin);
+
+        form.onLogin(loginObj.setUserPass);
     }
 
     function ajaxLogin(uname, loginHash) {
@@ -94,12 +113,38 @@
             { uname: uname, loginHash: loginHash },
             function (data) {
 
-                console.log(data);
-
-                // if login success
+                onLoginResult(data);
 
             }
         );
+
+    }
+
+    function onLoginResult(data) {
+
+        console.log(data);
+
+        switch (data.code) {
+
+            case 0: // success
+
+                alert('success');
+
+                break;
+
+            case 1: // no such user
+
+                alert('no such user');
+
+                break;
+
+            case 2: // pw wrong
+
+                alert('wrong pw');
+
+                break;
+
+        }
 
     }
 

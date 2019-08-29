@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>deferred.then demo</title>
+  <script src="js/jquery.js"></script>
+</head>
+<body>
+ 
+<button>Filter Resolve</button>
+<p></p>
+ 
+<script>
+
+    var filterResolve = function() {
+        var defer = $.Deferred(),
+            filtered = defer.then(function( value ) {
+                return value * 2;
+            });
+        
+        defer.resolve( 5 );
+
+        filtered.done(function( value ) {
+            $( "p" ).html( "Value is ( 2*5 = ) 10: " + value );
+            
+            console.log('value = ', value);
+        });
+
+    };
+    
+    $( "button" ).on( "click", filterResolve );
+
+</script>
+ 
+</body>
+</html>

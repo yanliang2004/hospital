@@ -21,12 +21,37 @@ function ajaxLogin(uname, loginHash) {
         { uname: uname, loginHash: loginHash },
         function (data) {
 
-            console.log(data);
-
-            // if login success
+            onLoginResult(data);
 
         }
     );
 
 }
 
+function onLoginResult(data) {
+
+    console.log(data);
+
+    switch (data.code) {
+
+        case 0: // success
+
+            alert('success');
+
+            break;
+
+        case 1: // no such user
+
+            alert('no such user');
+
+            break;
+
+        case 2: // pw wrong
+
+            alert('wrong pw');
+
+            break;
+
+    }
+
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录测试</title>
+    <style>
+
+        .form-group {
+            margin: 1em 0;
+        }
+
+        label, input, button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box; 
+        }
+
+        input, button {
+            height: 2.5em;
+        }
+        label {
+            height: 1.5em;
+            line-height: 1.5em;
+        }
+
+        .error {
+            color: #c00;
+        }
+
+        .field-msg.valid {
+            color: #386;
+            
+        }
+
+        .field-msg.valid:before {
+            content: 'OK';
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    
+    <form action="loginTest.php" method="post" id="frm-login">
+
+        <div class="form-group">
+            <label for="uname">登录名</label>
+            <input type="text" name="uname" id="uname" required title="请输入登录名">
+            <label for="uname" class="error field-msg"></label>
+        </div>
+
+        <div class="form-group">
+            <label for="pw">密码</label>
+            <input type="password" name="pw" id="pw" required title="请输入密码">
+            <label for="pw" class="error field-msg"></label>
+        </div>
+
+        <button id="btn-save">登录</button>
+
+
+    </form>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/md5.js"></script>
+    <script src="js/login-test.js"></script>
+</body>
+</html>
