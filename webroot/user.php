@@ -5,6 +5,13 @@ require_once 'vendor/autoload.php';
 class User
 {
 
+    public static function findUserByUname($uname)
+    {
+        $col = self::getCol('hospital', 'users');
+
+        return $col->findOne(['uname' => $uname]);
+    }
+
     public static function findOne($uname)
     {
         $col = self::getCol('hospital', 'users');

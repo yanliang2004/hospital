@@ -78,7 +78,7 @@ function getValResult($validator) {
             return (string)$val[0];
         },
         $msgs
-        );
+    );
 
     return $arr;
 }
