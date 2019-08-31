@@ -7,6 +7,18 @@
     <title>登录测试</title>
     <style>
 
+        #frm-hl {
+            font-size: 2em;
+            margin: 0;
+            line-height: 3em;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .frm-msg {
+            
+        }
+
         .form-group {
             margin: 1em 0;
         }
@@ -46,6 +58,10 @@
 <body>
     
     <form action="loginTest.php" method="post" id="frm-login">
+
+        <h2 id="frm-hl">用户登录</h2>
+
+        <div id="frm-msg"></div>
 
         <div class="form-group">
             <label for="uname">登录名</label>

@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 require_once 'user.php';
+require_once 'session.php';
 
 main();
 
@@ -13,7 +14,7 @@ function main() {
     {
         // 提交的数据不完整
         respond(1, getValMsgs($validator));
-    
+        
         return;
     }
 
@@ -24,7 +25,7 @@ function main() {
     catch (Exception $ex)
     {
         // 数据库错误
-        respond(5, $ex);
+        respond(5, '数据库错误');
 
         return ;
     }
@@ -32,7 +33,7 @@ function main() {
 
     if (empty($row))
     {
-        respond(2, '用户不存在');
+        respond(2, ['uname' => '用户不存在']);
 
         return;
     }
@@ -41,7 +42,8 @@ function main() {
 
     if ($answer != $_POST['loginHash'])
     {
-        respond(3, '密码不对');
+        respond(3, ['pw' => '密码不对']);
+
         return;
     }
 
@@ -56,6 +58,7 @@ function respond($code, $result) {
     ]);
 }
 
+
 function initValidator() {
 
     $validator = new \Sirius\Validation\Validator;
@@ -66,6 +69,8 @@ function initValidator() {
 
     return $validator;
 }
+
+
 
 function getValMsgs($validator) {
 
@@ -80,3 +85,4 @@ function getValMsgs($validator) {
 
     return $arr;
 }
+

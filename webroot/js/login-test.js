@@ -3,9 +3,11 @@ var frmLogin = function () {
     var $frm = $('#frm-login'),
         $uname = $frm.find('#uname'),
         $pw = $frm.find('#pw'),
-        $btnSave = $frm.find('#btn-save');
+        $btnSave = $frm.find('#btn-save'),
+        $frmMsg = $frm.find('#frm-msg');
 
-    $frm.validate({
+    // 用于显示服务器返回的错误消息
+    var validator = $frm.validate({
         success: 'valid',
         submitHandler: function () {
             disableForm();
@@ -26,7 +28,21 @@ var frmLogin = function () {
 
         reset: function () {
             this.init();
-        }
+        },
+
+        showMsg: function (msg) {
+            $frmMsg.text(msg);
+
+            console.log(msg);
+        },
+
+        showFieldErrors: function (fieldErrors) {
+            validator.showErrors(fieldErrors);
+        },
+
+        disableForm: disableForm,
+
+        enableForm: enableForm
 
     };
 
@@ -66,6 +82,8 @@ var nonce = function () {
             var deferred = this.deferred = $.Deferred();
 
             $.getJSON('getNonce.php', function (nonce) {
+                console.log('nonce: ', nonce);
+
                 deferred.resolve(nonce);
             });
         },
@@ -82,12 +100,20 @@ var nonce = function () {
 
 !function () {
 
-    frmLogin.init();
 
-    nonce.init();
+    init();
 
-    $.when(frmLogin.deferred, nonce.deferred)
-     .then(tryLogin, reset);
+    function init() {
+
+        frmLogin.init();
+
+        nonce.init();
+
+        $.when(frmLogin.deferred, nonce.deferred)
+         .then(tryLogin);
+        
+    }
+
 
     function tryLogin(userData, nonce) {
 
@@ -103,35 +129,62 @@ var nonce = function () {
             {
                 uname: userData.uname,
                 loginHash: loginHash
-            }, 
-            onLoginResult
+            },
+            onLoginResult,
+            'json'
         );
 
     }
 
-    function reset() {
-        console.log('reset');
-    }
+
 
     function onLoginResult(data) {
+
+        // console.log(data);
+
         switch (data.code) {
+
             case 0: 
 
                 console.log('login success');
+
+                document.title = '登陆成功';
 
                 break;
 
             case 1: 
 
-                console.log('no such user');
+                console.log('提交的数据不完整');
+
+                frmLogin.showFieldErrors(data.result);
+
                 break;
 
             case 2:
 
-                console.log('wrong pw');
+                console.log('用户不存在');
+
+                frmLogin.showFieldErrors(data.result);
+
+                break;
+
+            case 3:
+
+                console.log('密码不对');
+
+                frmLogin.showFieldErrors(data.result);
+
+                break;
+
+            case 5: 
+
+                frmLogin.showMsg('登陆失败： ' + data.result);
 
                 break;
         }
+
+        init();
+
     }
 
 }()
