@@ -30,8 +30,6 @@ var frmLogin = function () {
 
     };
 
-    
-
     function disableForm() {
         $uname.prop('disabled', true);
         $pw.prop('disabled', true);
@@ -54,13 +52,13 @@ var frmLogin = function () {
 
     return frmLogin;
 
-} ();
+}();
 
 
 
 var nonce = function () {
 
-    
+
     return {
         init: function () {
             var deferred = this.deferred = $.Deferred();
@@ -76,7 +74,7 @@ var nonce = function () {
 
     };
 
-    
+
 }();
 
 
@@ -87,7 +85,7 @@ var nonce = function () {
     nonce.init();
 
     $.when(frmLogin.deferred, nonce.deferred)
-     .then(tryLogin, reset);
+        .then(tryLogin, reset);
 
     function tryLogin(userData, nonce) {
 
@@ -103,7 +101,7 @@ var nonce = function () {
             {
                 uname: userData.uname,
                 loginHash: loginHash
-            }, 
+            },
             onLoginResult
         );
 
@@ -115,15 +113,16 @@ var nonce = function () {
 
     function onLoginResult(data) {
         switch (data.code) {
-            case 0: 
+            case 0:
 
                 console.log('login success');
 
                 break;
 
-            case 1: 
+            case 1:
 
-                console.log('no such user');
+
+
                 break;
 
             case 2:

@@ -1,151 +1,143 @@
 (function () {
     'use strict';
 
-    var nonce;
-
-    var uname, pw;
-
-    var fn;
-
-    function init(loginFn) {
-        fn = loginFn;
-    }
-
-    function setNonce(value) {
-
-        nonce = value;
-
-        console.log('nonce: ' + nonce);
-
-        if (isUserPassReady()) {
-            login();
-        }
-
-    }
-
-    function setUserPass(vUser, vPass) {
-        uname = vUser;
-        pw = vPass;
-
-        if (isNonceReady()) {
-            login();
-        }
-    }
-
-    function isNonceReady() {
-        return nonce;
-    }
-
-    function isUserPassReady() {
-        return uname && pw;
-    }
-
-    // fn(uname, loginHash)
-    function login() {
-
-        var pwh = md5(uname + ':' + pw);
-
-        var loginHash = md5(pwh + ':' + nonce);
-
-        fn(uname, loginHash);
-
-        console.log('uname: ', uname, ', loginHash: ', loginHash);
-
-    }
-
-    var loginObj = {
-        init: init,
-        setNonce: setNonce,
-        setUserPass: setUserPass
-    };
-
-    // login, form related code
-
-    var $frmLogin = $('#frm-login'),
+    var $frm = $('#frm-login'),
+        $frmMsg = $('#form-msg'),
         $uname = $('#uname'),
         $pw = $('#pw'),
-        $btnLogin = $('#btn-login'),
-        $btnResetPass = $('#btn-reset-pw'),
-        $lblUname = $('label[for="uname"]'),
-        $lblPw = $('label[for="pw"]');
+        $btnSave = $('#btn-login');
 
-    // 可以提交时，调用此函数：
-    var fnLogin;
+    var frmLogin = {
 
-    var validator = $frmLogin.validate({
+        init: function () {
+            this.deferred = $.Deferred();
+
+            this.enable();
+
+            $frmMsg.removeClass('error');
+        },
+
+        enable: function () {
+
+            $uname.prop('disabled', false);
+            $pw.prop('disabled', false);
+            $btnSave.prop('disabled', false);
+        },
+
+        disable: function () {
+            $uname.prop('disabled', true);
+            $pw.prop('disabled', true);
+            $btnSave.prop('disabled', true);
+        },
+
+        showErrors: function (errors) {
+            validator.showErrors(errors);
+        },
+
+        showErrorMsg: function (msg) {
+            $frmMsg.text(msg).addClass('error');
+        },
+
+    };
+
+    var validator = $frm.validate({
         success: 'valid',
-        submitHandler:  function (form) {
+        submitHandler: function () {
 
-            console.log('submitting login');
+            frmLogin.disable();
 
-            fnLogin(form.uname.value, form.pw.value);
+            frmLogin.deferred.resolve({
+                uname: $uname.val(),
+                pw: $pw.val()
+            });
+
         }
     });
 
-    function onLogin(fn) {
+    var nonce = {
+        init: function () {
+            var deferred =
+                this.deferred = $.Deferred();
 
-        fnLogin = fn;
+            $.getJSON('getNonce.php', function (data) {
+                deferred.resolve(data);
+            });
 
-    }
-
-
-    var form = {
-        onLogin: onLogin
+        }
     };
 
-    init$1();
+    function init() {
 
-    function init$1() {
+        frmLogin.init();
 
-        $.getJSON('getNonce.php', {}, function (data) {
-            loginObj.setNonce(data.nonce);
-        });
+        nonce.init();
 
-        loginObj.init(ajaxLogin);
+        $.when(frmLogin.deferred, nonce.deferred)
+            .done(tryLogin);
 
-        form.onLogin(loginObj.setUserPass);
     }
 
-    function ajaxLogin(uname, loginHash) {
+    function tryLogin(userData, nonce) {
+
+        var loginHash = calcLoginHash(userData, nonce);
 
         $.post(
             'login.php',
-            { uname: uname, loginHash: loginHash },
-            function (data) {
-
-                onLoginResult(data);
-
-            }
+            { uname: userData.uname, loginHash: loginHash },
+            onLoginResult,
+            'json'
         );
+    }
+
+    function calcLoginHash(userData, nonce) {
+
+        var pwh = md5(userData.uname + ':' + userData.pw);
+
+        return md5(pwh + ':' + nonce);
 
     }
+
 
     function onLoginResult(data) {
 
         console.log(data);
 
         switch (data.code) {
+            case 0:
 
-            case 0: // success
-
-                alert('success');
-
-                break;
-
-            case 1: // no such user
-
-                alert('no such user');
+                location = 'user-list.html';
 
                 break;
 
-            case 2: // pw wrong
+            case 1:
 
-                alert('wrong pw');
+                frmLogin.showErrors(data.data);
 
                 break;
 
+            case 2:
+
+                frmLogin.showErrors({ uname: data.data });
+
+                break;
+
+            case 3:
+
+                frmLogin.showErrors({ pw: data.data });
+
+                break;
+
+            case 5:
+
+                frmLogin.showErrors({ uname: data.data });
+
+                break;
         }
 
+        init();
     }
+
+
+    init();
 
 }());
