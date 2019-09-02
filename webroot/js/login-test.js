@@ -46,8 +46,6 @@ var frmLogin = function () {
 
     };
 
-    
-
     function disableForm() {
         $uname.prop('disabled', true);
         $pw.prop('disabled', true);
@@ -70,13 +68,13 @@ var frmLogin = function () {
 
     return frmLogin;
 
-} ();
+}();
 
 
 
 var nonce = function () {
 
-    
+
     return {
         init: function () {
             var deferred = this.deferred = $.Deferred();
@@ -94,7 +92,7 @@ var nonce = function () {
 
     };
 
-    
+
 }();
 
 
@@ -113,7 +111,6 @@ var nonce = function () {
          .then(tryLogin);
         
     }
-
 
     function tryLogin(userData, nonce) {
 
@@ -143,8 +140,7 @@ var nonce = function () {
         // console.log(data);
 
         switch (data.code) {
-
-            case 0: 
+            case 0:
 
                 console.log('login success');
 
@@ -152,11 +148,9 @@ var nonce = function () {
 
                 break;
 
-            case 1: 
+            case 1:
 
-                console.log('提交的数据不完整');
 
-                frmLogin.showFieldErrors(data.result);
 
                 break;
 

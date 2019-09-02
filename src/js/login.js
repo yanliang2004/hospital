@@ -1,57 +1,76 @@
-import loginObj from './login-obj';
-import form from './login-form';
-
-init();
+import frmLogin from './login-form.js'
+import nonce from './login-nonce.js'
 
 function init() {
 
-    $.getJSON('getNonce.php', {}, function (data) {
-        loginObj.setNonce(data.nonce);
-    });
+    frmLogin.init();
 
-    loginObj.init(ajaxLogin);
+    nonce.init();
 
-    form.onLogin(loginObj.setUserPass);
+    $.when(frmLogin.deferred, nonce.deferred)
+        .done(tryLogin);
+
 }
 
-function ajaxLogin(uname, loginHash) {
+function tryLogin(userData, nonce) {
+
+    var loginHash = calcLoginHash(userData, nonce);
 
     $.post(
         'login.php',
-        { uname: uname, loginHash: loginHash },
-        function (data) {
-
-            onLoginResult(data);
-
-        }
+        { uname: userData.uname, loginHash: loginHash },
+        onLoginResult,
+        'json'
     );
+}
+
+function calcLoginHash(userData, nonce) {
+
+    var pwh = md5(userData.uname + ':' + userData.pw);
+
+    return md5(pwh + ':' + nonce);
 
 }
+
 
 function onLoginResult(data) {
 
     console.log(data);
 
     switch (data.code) {
+        case 0:
 
-        case 0: // success
-
-            alert('success');
-
-            break;
-
-        case 1: // no such user
-
-            alert('no such user');
+            location = 'user-list.html';
 
             break;
 
-        case 2: // pw wrong
+        case 1:
 
-            alert('wrong pw');
+            frmLogin.showErrors(data.data);
 
             break;
 
+        case 2:
+
+            frmLogin.showErrors({ uname: data.data })
+
+            break;
+
+        case 3:
+
+            frmLogin.showErrors({ pw: data.data });
+
+            break;
+
+        case 5:
+
+            frmLogin.showErrors({ uname: data.data });
+
+            break;
     }
 
+    init();
 }
+
+
+init();

@@ -1,39 +1,53 @@
-
-// login, form related code
-
-var $frmLogin = $('#frm-login'),
+var $frm = $('#frm-login'),
+    $frmMsg = $('#form-msg'),
     $uname = $('#uname'),
     $pw = $('#pw'),
-    $btnLogin = $('#btn-login'),
-    $btnResetPass = $('#btn-reset-pw'),
-    $lblUname = $('label[for="uname"]'),
-    $lblPw = $('label[for="pw"]');
+    $btnSave = $('#btn-login');
 
-// 可以提交时，调用此函数：
-var fnLogin;
+var frmLogin = {
 
-var validator = $frmLogin.validate({
+    init: function () {
+        this.deferred = $.Deferred();
+
+        this.enable();
+
+        $frmMsg.removeClass('error');
+    },
+
+    enable: function () {
+
+        $uname.prop('disabled', false);
+        $pw.prop('disabled', false);
+        $btnSave.prop('disabled', false);
+    },
+
+    disable: function () {
+        $uname.prop('disabled', true);
+        $pw.prop('disabled', true);
+        $btnSave.prop('disabled', true);
+    },
+
+    showErrors: function (errors) {
+        validator.showErrors(errors);
+    },
+
+
+};
+
+var validator = $frm.validate({
     success: 'valid',
-    submitHandler:  function (form) {
+    submitHandler: function () {
 
-        console.log('submitting login');
+        frmLogin.disable();
 
-        fnLogin(form.uname.value, form.pw.value);
+        frmLogin.deferred.resolve({
+            uname: $uname.val(),
+            pw: $pw.val()
+        });
+
     }
 });
 
-function onLogin(fn) {
 
-    fnLogin = fn;
+export default frmLogin;
 
-}
-
-function reset() {
-    $btnLogin.prop('disabled', false);
-    $btnResetPass.prop('disabled', false);
-}
-
-
-export default {
-    onLogin: onLogin
-};
