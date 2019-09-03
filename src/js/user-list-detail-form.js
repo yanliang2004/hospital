@@ -18,6 +18,7 @@ var frmUser = function () {
 
 	var data, state;
 
+	// state pattern
 	var stateNew = function () {
 
 		function collectFormData() {
@@ -26,6 +27,13 @@ var frmUser = function () {
 				uname: $uname.val(),
 				dept: $dept.val()
 			};
+		}
+
+		function onPostResult(data) {
+			
+			console.log(data);
+
+			unfreeze();
 		}
 
 		return {
@@ -39,14 +47,7 @@ var frmUser = function () {
 
 			submit: function () {
 
-				$.post('addUser.php', collectFormData(), function (data) {
-
-					// 
-					console.log(data);
-
-					unfreeze();
-
-				}, 'json');
+				$.post('addUser.php', collectFormData(), onPostResult, 'json');
 
 			},
 
@@ -54,6 +55,7 @@ var frmUser = function () {
 
 	} ();
 
+	// state pattern
 	var stateEdit = function () {
 
 		function updatedFields() {
@@ -73,6 +75,14 @@ var frmUser = function () {
 			return fields;
 		}
 
+		function onPostResult(data) {
+			
+			console.log(data);
+
+			unfreeze();
+		}
+
+
 		return {
 
 			apply: function () {
@@ -84,13 +94,7 @@ var frmUser = function () {
 			},
 
 			submit: function () {
-				$.post('updateUser.php', updatedFields(), function (data) {
-					
-					// {code, msg, data}
-					console.log(data);
-					unfreeze();
-					
-				}, 'json');
+				$.post('updateUser.php', updatedFields(), onPostResult, 'json');
 			},
 
 		};
@@ -100,7 +104,7 @@ var frmUser = function () {
 
 
 	var validator = $frm.validate({
-		success: 'OK',
+		success: 'valid',
 		submitHandler: function () {
 			freeze();
 			state.submit();

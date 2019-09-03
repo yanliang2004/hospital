@@ -34,9 +34,6 @@
             validator.showErrors(errors);
         },
 
-        showErrorMsg: function (msg) {
-            $frmMsg.text(msg).addClass('error');
-        },
 
     };
 

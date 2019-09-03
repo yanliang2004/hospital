@@ -430,6 +430,7 @@
 
 		var data, state;
 
+		// state pattern
 		var stateNew = function () {
 
 			function collectFormData() {
@@ -466,6 +467,7 @@
 
 		} ();
 
+		// state pattern
 		var stateEdit = function () {
 
 			function updatedFields() {
@@ -512,7 +514,7 @@
 
 
 		var validator = $frm.validate({
-			success: 'OK',
+			success: 'valid',
 			submitHandler: function () {
 				freeze();
 				state.submit();

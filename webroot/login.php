@@ -2,12 +2,11 @@
 
 require_once 'vendor/autoload.php';
 require_once 'user.php';
+require_once 'session.php';
 
 main();
 
 function main() {
-
-    session_start();
 
     $validator = initValidator();
 
@@ -49,6 +48,8 @@ function main() {
     }
 
     // 登录成功，返回用户id：
+    loginUser($row);
+
     respond(0, $row->_id);
 
 
@@ -58,7 +59,7 @@ function initValidator() {
     $validator = new \Sirius\Validation\Validator;
 
     $validator->add('uname', 'required () (登录名不能为空)');
-
+    
     $validator->add('loginHash', 'required () (密码不能为空)');
 
     return $validator;

@@ -40,6 +40,16 @@ class User
         return $docNextId->value;
     }
 
+    public static function update($id, $data)
+    {
+        $col = self::getCol('hospital', 'users');
+
+        $col->updateOne(
+            ['_id' => $id],
+            ['$set' => $data]
+        );
+    }
+
     public static function resetPw($id)
     {
         $col = self::getCol('hospital', 'users');
@@ -72,8 +82,8 @@ class User
         $uri = 'mongodb://127.0.0.1/hospital';
 
         $uriOpt = [
-            'username' => 'admin',
-            'password' => 'admin'
+            // 'username' => 'admin',
+            // 'password' => 'admin'
         ];
 
         return new MongoDB\Client($uri, $uriOpt);

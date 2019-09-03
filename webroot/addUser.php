@@ -1,61 +1,48 @@
 <?php
 
-/**
- * 1) success: inserted record id
- *    { code: 0, return: { id: id } }
- * 
- * 
- * 2) fail: 
- * 
- *    2.1) validation fail 
- *         { code: 1, return: [ { field, err }, ... ] }
- *
- *    2.2) insertion fail
- *         { code: 2, return: err }
- * 
- * 
- */
-
 require_once 'vendor/autoload.php';
 require_once 'user.php';
+require_once 'session.php';
 
 
-function main()
-{
-    
+main();
+
+function main() {
+
+    if (!checkLogin())
+    {
+        respond(10, '未登录，无权操作');
+
+        return ;
+    }
+
     $validator = initValidator();
 
-    if ($validator->validate($_POST))
+    // validation fails
+    if (!$validator->validate($_POST)) 
     {
+        respond(1, getValErrors($validator));
+        return ;
+    }
+
+    // try to add user:
+    try {
         $id = addUser($_POST);
 
-        $r = [
-            'code'=>0, 
-            'result' => ['id' => $id]
-        ];
+        respond(0, $id);
 
-        echo json_encode($r);
-
+        return ;
     }
-    else
+    catch (Exception $ex)
     {
-        echo json_encode([
-            'code' => 1,
-            'result' => getValResult($validator)
-        ]);
-        
+        respond(5, $ex->getMessage());
+        return;
     }
+
 }
 
-function addUser($post)
-{
-    $uname = $post['uname'];
-
-    // init password: 1234
-    $pwh = md5("$uname:1234");
-
-    return User::add($uname, $pwh, $post['name'], $post['dept']);
-    
+function checkLogin() {
+    return isLoggedIn();
 }
 
 function initValidator() {
@@ -67,14 +54,24 @@ function initValidator() {
     $validator->add('dept', 'required () (科室id不能为空) | integer () (科室id不对)');
 
     return $validator;
+
 }
 
-function getValResult($validator) {
+function respond($code, $data)
+{
+    echo json_encode([
+        'code' => $code,
+        'data' => $data,
+    ]);
+}
+
+
+function getValErrors($validator) {
 
     $msgs = $validator->getMessages();
 
     $arr = array_map(
-        function($val) {
+        function ($val) {
             return (string)$val[0];
         },
         $msgs
@@ -83,4 +80,11 @@ function getValResult($validator) {
     return $arr;
 }
 
-main();
+function addUser($post) {
+
+    // initial pw is 1234:
+    $pwh = md5("$post[uname]:1234");
+
+    return User::add($post['uname'], $pwh, $post['name'], $post['deptId']);
+
+}
