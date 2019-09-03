@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 require_once 'user.php';
 require_once 'session.php';
+require_once 'ValFilter.php';
 
 
 main();
@@ -11,23 +12,24 @@ function main() {
 
     if (!checkLogin())
     {
-        respond(10, '未登录，无权操作');
+        //respond(10, '未登录，无权操作');
 
-        return ;
+        // return ;
     }
 
-    $validator = initValidator();
+    $filter = initFilter();
 
     // validation fails
-    if (!$validator->validate($_POST)) 
+    if (!$filter->validate($_POST)) 
     {
-        respond(1, getValErrors($validator));
+        respond(1, $filter->errMsgs);
+
         return ;
     }
 
     // try to add user:
     try {
-        $id = addUser($_POST);
+        $id = addUser($filter->result);
 
         respond(0, $id);
 
@@ -45,15 +47,24 @@ function checkLogin() {
     return isLoggedIn();
 }
 
-function initValidator() {
+function initFilter() {
 
-    $validator = new \Sirius\Validation\Validator;
+    $filter = new ValFilter([
+        'name' => [
+            FILTER_SANITIZE_STRING,
+            ['empty' => '姓名不能为空']
+        ],
+        'uname' => [
+            FILTER_SANITIZE_STRING, 
+            ['empty' => '登录名不能为空']
+        ],
+        'deptId' => [
+            FILTER_VALIDATE_INT, 
+            ['empty' => '科室id不能为空', 'invalid' => '科室id不对']
+        ]
+    ]);
 
-    $validator->add('name', 'required () (姓名不能为空)');
-    $validator->add('uname', 'required () (登录名不能为空)');
-    $validator->add('dept', 'required () (科室id不能为空) | integer () (科室id不对)');
-
-    return $validator;
+    return $filter;
 
 }
 
@@ -63,21 +74,6 @@ function respond($code, $data)
         'code' => $code,
         'data' => $data,
     ]);
-}
-
-
-function getValErrors($validator) {
-
-    $msgs = $validator->getMessages();
-
-    $arr = array_map(
-        function ($val) {
-            return (string)$val[0];
-        },
-        $msgs
-    );
-
-    return $arr;
 }
 
 function addUser($post) {

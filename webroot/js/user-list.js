@@ -441,6 +441,13 @@
 				};
 			}
 
+			function onPostResult(data) {
+				
+				console.log(data);
+
+				unfreeze();
+			}
+
 			return {
 
 				apply: function () {
@@ -452,14 +459,7 @@
 
 				submit: function () {
 
-					$.post('addUser.php', collectFormData(), function (data) {
-
-						// 
-						console.log(data);
-
-						unfreeze();
-
-					}, 'json');
+					$.post('addUser.php', collectFormData(), onPostResult, 'json');
 
 				},
 
@@ -487,6 +487,14 @@
 				return fields;
 			}
 
+			function onPostResult(data) {
+				
+				console.log(data);
+
+				unfreeze();
+			}
+
+
 			return {
 
 				apply: function () {
@@ -498,13 +506,7 @@
 				},
 
 				submit: function () {
-					$.post('updateUser.php', updatedFields(), function (data) {
-						
-						// {code, msg, data}
-						console.log(data);
-						unfreeze();
-						
-					}, 'json');
+					$.post('updateUser.php', updatedFields(), onPostResult, 'json');
 				},
 
 			};

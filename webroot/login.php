@@ -3,12 +3,16 @@
 require_once 'vendor/autoload.php';
 require_once 'user.php';
 require_once 'session.php';
+require_once 'ValFilter.php';
 
 main();
 
 function main() {
 
-    $validator = initValidator();
+    $filter = new ValFilter([
+        'uname' => ['empty' => '登录名不能为空'],
+        'loginHash' => ['empty' => '密码不能为空']
+    ]);
 
     // 没通过表单提交，可能是攻击
     if (!$validator->validate($_POST))
@@ -59,7 +63,7 @@ function initValidator() {
     $validator = new \Sirius\Validation\Validator;
 
     $validator->add('uname', 'required () (登录名不能为空)');
-    
+
     $validator->add('loginHash', 'required () (密码不能为空)');
 
     return $validator;
