@@ -430,6 +430,19 @@
 
 		var data, state;
 
+		// btnSave enabled only when data changed:
+		$frm.on('input', function (e) {
+
+			console.log(e.target);
+			$btnSave.prop('disabled', !dataChanged());
+		});
+
+		function dataChanged() {
+			return data.uname != $uname.val() ||
+				data.name != $name.val() ||
+				data.deptId != $dept.val();
+		}
+
 		// state pattern
 		var stateNew = function () {
 
@@ -437,7 +450,7 @@
 				return {
 					name: $name.val(),
 					uname: $uname.val(),
-					dept: $dept.val()
+					deptId: $dept.val()
 				};
 			}
 
@@ -473,13 +486,14 @@
 			function updatedFields() {
 				var fields = {};
 
-				$.each([$name, $uname, $dept], function (i, $input) {
-					var key = $input[0].name,
+				$.each([$uname, $name, $dept], function (i, $input) {
+					var key = $input.prop('name'),
 						value = $input.val();
 
 					if (data[key] != value) {
 						fields[key] = value;
 					}
+
 				});
 
 				fields.id = data.id;
@@ -494,7 +508,6 @@
 				unfreeze();
 			}
 
-
 			return {
 
 				apply: function () {
@@ -503,11 +516,16 @@
 					$uname.val(data.uname);
 					$dept.val(data.deptId);
 					pwField.setStateEdit();
+
+
+
 				},
 
 				submit: function () {
 					$.post('updateUser.php', updatedFields(), onPostResult, 'json');
 				},
+
+
 
 			};
 
@@ -518,6 +536,7 @@
 		var validator = $frm.validate({
 			success: 'valid',
 			submitHandler: function () {
+				console.log('submitting...');
 				freeze();
 				state.submit();
 			}

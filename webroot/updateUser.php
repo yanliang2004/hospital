@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 require_once 'user.php';
 require_once 'session.php';
+require_once 'ValFilter.php';
 
 main();
 
@@ -15,39 +16,33 @@ function main() {
     //     // return ;
     // }
 
-    if (empty($_POST['id']))
-    {
-        respond(1, ['id' => '用户id不能为空']);
+    $filter = initValFilter();
 
-        return;
+    if (!$filter->validate($_POST)) {
+        respond(1, $filter->errMsgs);
+
+        return ;
     }
 
-    $data = getValidUpdate($_POST);
+    $data = $filter->result;
 
 
-    if (empty($data))
-    {
-        respond(2, '指定的更新无效');
-        return;
-    }
 
     try {
-
-        echo json_encode($_POST['id']);
-        echo json_encode($data);
-
-        User::update((int)$_POST['id'], $data);
-
-
-        return ;
+        $row = User::update();
     }
-    catch (Exception $ex) 
-    {
-        respond(5, '数据库错误: ' . $ex->getMessage());
+    catch (Exception $ex) {
+        respond(5, '数据库错误');
 
         return ;
     }
 
+}
+
+function initValFilter() {
+    return new ValFilter([
+        'id' => ['empty' => '用户id不能为空', 'invalid' => '用户id格式不对']
+    ]);
 }
 
 function checkLogin() {
@@ -58,7 +53,7 @@ function respond($code, $data)
 {
     echo json_encode([
         'code' => $code,
-        'data' => $data,
+        'data' => $data
     ]);
 }
 
