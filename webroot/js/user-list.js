@@ -430,12 +430,6 @@
 
 		var data, state;
 
-		// btnSave enabled only when data changed:
-		$frm.on('input', function (e) {
-
-			console.log(e.target);
-			$btnSave.prop('disabled', !dataChanged());
-		});
 
 		function dataChanged() {
 			return data.uname != $uname.val() ||
@@ -522,7 +516,14 @@
 				},
 
 				submit: function () {
-					$.post('updateUser.php', updatedFields(), onPostResult, 'json');
+					
+					if (dataChanged()) {
+						$.post('updateUser.php', updatedFields(), onPostResult, 'json');
+					}
+					else {
+						alert('数据没有改变');
+					}
+					
 				},
 
 
@@ -572,7 +573,7 @@
 			setData: function (d) {
 				data = d;
 
-				// console.log('frm.setData(): ' + JSON.stringify(data));
+				console.log('frm.setData(): ' + JSON.stringify(data));
 
 			},
 

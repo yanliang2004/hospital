@@ -8,7 +8,3 @@ $.getJSON('testMock.php', function(data) {
     console.log(data);
 });
 
-
-$.getJSON('getNonce.php', function(nonce) {
-    console.log(nonce);
-});

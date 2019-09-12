@@ -1,0 +1,37 @@
+html, body {
+    margin: 0;
+    font: 100% sans-serif;
+}
+
+#main-panel {
+    background: #efe;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+#side-panel {
+    display: none;
+    background: #fef;
+}
+
+@media screen and (min-width: 40em) {
+    
+    #main-panel {
+        left: 15em;
+    }
+
+    #side-panel {
+        display: block;
+        position: absolute;
+        width: 15em;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        overflow-y: auto;
+    }
+
+}
