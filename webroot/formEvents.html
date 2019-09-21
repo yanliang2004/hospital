@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form event test</title>
+    <style>
+        label, input, select  {
+            font: 1em sans-serif;
+            
+        }
+
+        .form-group {
+            margin: 1em 0;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h3>测试表单事件，用于数据绑定</h3>
+
+    <form action="" id="frm">
+
+        <div class="form-group">
+            <label for="uname">登录名</label>
+            <input type="text" id="uname">
+
+        </div>
+        
+        <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" id="name">
+
+        </div>
+
+
+        <div class="form-group">
+            <label for="g-m">男</label>
+            <input type="radio" name="gender" id="g-m">
+
+            <label for="g-f">女</label>
+            <input type="radio" name="gender" id="g-f">
+
+        </div>
+
+        <div class="form-group">
+            <label for="dept"></label>
+            <select name="dept" id="dept">
+                <option value="1">心外科</option>
+                <option value="2">心内科</option>
+                <option value="3">呼吸科</option>
+                <option value="4">消化科</option>
+                <option value="5">骨科</option>
+                <option value="6">检验科</option>
+            </select>
+        </div>
+
+    </form>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/formEvents.js"></script>
+
+</body>
+</html>
