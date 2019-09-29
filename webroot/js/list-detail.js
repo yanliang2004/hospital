@@ -3,8 +3,8 @@ var data = function () {
     
 
     return {
-        list: ,
-        detail: ,
+        list: [],
+        detail: {},
     }
 
 } ();
