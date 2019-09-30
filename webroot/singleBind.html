@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+            #frm-user, 
+            #frm-view {
+                display: inline-block;
+                width: 48%;
+                border: 1px solid #3c6;
+            }
+
         .form-group {
             margin: 1em 0;
         }
@@ -15,58 +22,88 @@
 
 
     </style>
-</head>
-<body>
-    
-    <form action="" id="frm-user">
+    </head>
+    <body>
 
-        <div class="form-group">
-            <label for="uname">登录名</label>
-            <input type="text" name="uname" id="uname">
-        </div>
+        <form action="" id="frm-user">
 
-        <div class="form-group">
-            <label for="female">女</label>
-            <input type="radio" name="gender" id="female" value="0">
-            <label for="male">男</label>
-            <input type="radio" name="gender" id="male" value="1">
-        </div>
+            <div class="form-group">
+                <label for="uname">登录名</label>
+                <input type="text" name="uname" id="uname">
+            </div>
 
-        <div class="form-group">
-            <label for="apple">Apple</label>
-            <input type="checkbox" name="fruit" id="apple" value="apple">
-            <label for="pear">pear</label>
-            <input type="checkbox" name="fruit" id="pear" value="pear">
-            <label for="grape">grape</label>
-            <input type="checkbox" name="fruit" id="grape" value="grape">
-        </div>
-        <div class="form-group">
-            <label for="apple">Apple</label>
-            <input type="checkbox" name="fruit2" id="apple2" value="apple">
-            <label for="pear">pear</label>
-            <input type="checkbox" name="fruit2" id="pear2" value="pear">
-            <label for="grape">grape</label>
-            <input type="checkbox" name="fruit2" id="grape2" value="grape">
-        </div>
+            <div class="form-group">
+                <label for="female">女</label>
+                <input type="radio" name="gender" id="female" value="0">
+                <label for="male">男</label>
+                <input type="radio" name="gender" id="male" value="1">
+            </div>
 
-        <div class="form-group">
-            <label for="dept"></label>
-            <select name="dept" id="dept" multiple>
-                <option value="1">心内科</option>
-                <option value="2">心外科</option>
-                <option value="3">呼吸科</option>
-                <option value="4">消化科</option>
-                <option value="5">检验科</option>
-                <option value="6">骨科</option>
-            </select>
-        </div>
+            <div class="form-group">
+                <label for="apple">Apple</label>
+                <input type="checkbox" name="fruit" id="apple" value="apple">
+                <label for="pear">pear</label>
+                <input type="checkbox" name="fruit" id="pear" value="pear">
+                <label for="grape">grape</label>
+                <input type="checkbox" name="fruit" id="grape" value="grape">
+            </div>
+
+            <div class="form-group">
+                <label for="dept"></label>
+                <select name="dept" id="dept" multiple>
+                    <option value="1">心内科</option>
+                    <option value="2">心外科</option>
+                    <option value="3">呼吸科</option>
+                    <option value="4">消化科</option>
+                    <option value="5">检验科</option>
+                    <option value="6">骨科</option>
+                </select>
+            </div>
 
 
-    </form>
+        </form>
+
+        <form action="" id="frm-view">
+
+            <div class="form-group">
+                <label for="uname2">登录名</label>
+                <input type="text" name="uname2" id="uname2">
+            </div>
+
+            <div class="form-group">
+                <label for="female2">女</label>
+                <input type="radio" name="gender2" id="female2" value="0">
+                <label for="male2">男</label>
+                <input type="radio" name="gender2" id="male2" value="1">
+            </div>
+
+            <div class="form-group">
+                <label for="apple2">Apple</label>
+                <input type="checkbox" name="fruit2" id="apple2" value="apple">
+                <label for="pear2">pear</label>
+                <input type="checkbox" name="fruit2" id="pear2" value="pear">
+                <label for="grape2">grape</label>
+                <input type="checkbox" name="fruit2" id="grape2" value="grape">
+            </div>
+
+            <div class="form-group">
+                <label for="dept2"></label>
+                <select name="dept2" id="dept2" multiple>
+                    <option value="1">心内科</option>
+                    <option value="2">心外科</option>
+                    <option value="3">呼吸科</option>
+                    <option value="4">消化科</option>
+                    <option value="5">检验科</option>
+                    <option value="6">骨科</option>
+                </select>
+            </div>
 
 
-    <script src="js/jquery.js"></script>
-    <script src="js/singleBind.js"></script>
+        </form>
 
-</body>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/singleBind.js"></script>
+
+    </body>
 </html>

@@ -1,9 +1,10 @@
 
-var data = function() {
+var data = function () {
 
     var data = {
-            gender: 0
-        },
+        gender: 0,
+        fruit: 'apple'
+    },
         $msg = $({});
 
     return {
@@ -35,7 +36,7 @@ var data = function() {
 
 
 $.fn.databind = function () {
-    
+
 
     function bindText($el, data, prop) {
 
@@ -49,11 +50,10 @@ $.fn.databind = function () {
 
         // data -> view
         data.on('datachange', function (e, key, value, src) {
-            
-            if (key == prop)
-            {
+
+            if (key == prop) {
                 // 确保引发更改的控件不被更新
-                $el.each(function(i, elem) {
+                $el.each(function (i, elem) {
                     if (elem != src) {
                         elem.value = value;
                     }
@@ -96,7 +96,7 @@ $.fn.databind = function () {
     }
 
     function bindSelect($el, data, prop) {
-        
+
         // init view: single or multiple
         $el.val(data.get(prop));
 
@@ -120,15 +120,14 @@ $.fn.databind = function () {
     }
 
     function bindCheckbox($el, data, prop) {
-        
+
         // init view:
 
         var initVal = data.get(prop);
 
-        $el.prop('checked', function (i, oldPropValue) {
-            this.checked =
-                initVal &&
-                    (initVal.indexOf(this.value) >= 0);
+        $el.each(function (i, elem) {
+            elem.checked = initVal &&
+                (initVal.indexOf(elem.value) >= 0);
         });
 
 
@@ -136,15 +135,16 @@ $.fn.databind = function () {
         $el.change(function (e) {
 
             // what if ...
-            data.set(prop, collectGroupValues(e.target));
+            data.set(prop, collectGroupValues(e.target), e.target);
+
         });
 
         function collectGroupValues(elem) {
             return $('[name=' + elem.name + ']:checked')
-                    .map(function (i, el) {
-                        return el.id;
-                    })
-                    .get();
+                .map(function (i, el) {
+                    return el.value;
+                })
+                .get();
 
         }
 
@@ -152,8 +152,11 @@ $.fn.databind = function () {
         data.on('datachange', function (e, key, value, src) {
             // value should be an array
             if (key == prop) {
-                $el.prop('checked', function (i, oldPropValue) {
-                    return value && (value.indexOf(this.value) >= 0);
+                $el.each(function (i, elem) {
+                    if (elem != src) {
+                        elem.checked = value &&
+                            (value.indexOf(elem.value) >= 0);
+                    }
                 });
             }
 
@@ -167,19 +170,18 @@ $.fn.databind = function () {
 
         var type = $el.prop('type');
 
-        switch (type)
-        {
+        switch (type) {
             case 'radio':
                 bindRadio($el, data, prop);
-            break;
+                break;
 
             case 'checkbox':
                 bindCheckbox($el, data, prop);
-            break;
+                break;
 
             default:
                 bindText($el, data, prop);
-            break;
+                break;
         }
 
         // 'select-one' 'select-many'
@@ -193,22 +195,28 @@ $.fn.databind = function () {
 }();
 
 var frm = function () {
-    
+
     var $uname = $('#uname'),
+        $uname2 = $('#uname2'),
         $gender = $('#male, #female'),
+        $gender2 = $('#male2, #female2'),
         $fruit = $('[name=fruit]'),
         $fruit2 = $('[name=fruit2]'),
+        $dept2 = $('#dept2'),
         $dept = $('#dept');
 
     $uname.databind(data, 'uname');
+    $uname2.databind(data, 'uname');
 
     $gender.databind(data, 'gender');
+    $gender2.databind(data, 'gender');
 
     $fruit.databind(data, 'fruit');
-    
+
     $fruit2.databind(data, 'fruit');
 
     $dept.databind(data, 'dept');
+    $dept2.databind(data, 'dept');
 
 }();
 
