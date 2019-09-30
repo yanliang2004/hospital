@@ -147,6 +147,7 @@ var viewData = function () {
 }();
 
 
+
 var viewDataCtrl = function (view, data) {
 
     data.onchange(function (e, key, value, src) {
@@ -173,4 +174,3 @@ var viewFormCtrl = function (view, data) {
     view.showData(data.getData());
 
 }(viewForm, data);
-
