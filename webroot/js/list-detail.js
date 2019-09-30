@@ -5,6 +5,7 @@ var data = function () {
     return {
         list: [],
         detail: {},
+<<<<<<< HEAD
     }
 
 }();
@@ -137,6 +138,8 @@ $.fn.databind = function () {
 
         });
 
+=======
+>>>>>>> ab19b922717c8813e30523772ae187ab31c805a8
     }
 
     return function (data, prop) {
