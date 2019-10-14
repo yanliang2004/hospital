@@ -10,12 +10,18 @@ main();
 function main() {
 
     $filter = new ValFilter([
-        'uname' => ['empty' => '登录名不能为空'],
-        'loginHash' => ['empty' => '密码不能为空']
+        'uname' => [
+            FILTER_SANITIZE_STRING,
+            ['empty' => '登录名不能为空']
+        ],
+        'loginHash' => [
+            FILTER_SANITIZE_STRING,
+            ['empty' => '密码不能为空']
+        ]
     ]);
 
     // 没通过表单提交，可能是攻击
-    if (!$validator->validate($_POST))
+    if (!$filter->validate($_POST))
     {
         respond(1, getValMsgs($validator));
 

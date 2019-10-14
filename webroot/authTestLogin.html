@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>login page</title>
+        <style>
+        
+            #frm-login {
+                margin: 1em;
+                padding: 1em;
+            }
+
+            label, input, button {
+                font: 1em sans-serif;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            input, button {
+                height: 2.5em;
+                margin:  1em 0;
+            }
+
+            .error {
+                
+                color: #f00;
+            }
+
+        
+        </style>
+    </head>
+    <body>
+
+        <form id="frm-login">
+
+            <label for="uname">Uname</label>
+            <input type="text" id="uname">
+            <label for="uname" class="error field-msg" id="field-msg-uname"></label>
+            <button id="btn-login">登录</button>
+
+
+        </form>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/store.legacy.min.js"></script>
+        <script src="js/clientAuth.js"></script>
+        <script src="js/authTestLogin.js"></script>
+    </body>
+
+</html>

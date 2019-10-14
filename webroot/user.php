@@ -82,8 +82,8 @@ class User
         $uri = 'mongodb://127.0.0.1/hospital';
 
         $uriOpt = [
-            // 'username' => 'admin',
-            // 'password' => 'admin'
+            'username' => 'admin',
+            'password' => 'admin'
         ];
 
         return new MongoDB\Client($uri, $uriOpt);

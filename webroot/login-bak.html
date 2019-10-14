@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>用户登录</title>
+        <link rel="stylesheet" type="text/css" href="css/login.css" media="all"
+            />
+    </head>
+    <body class="bg-dark">
+
+        <form id="frm-login" action="login.php" method="post">
+
+            <h2 id="form-title">用户登录</h2>
+
+            <div class="form-group">
+                <label for="uname">用户名</label>
+                <input type="text" id="uname" name="uname" required
+                    title="请输入用户名" />
+                <label for="uname" class="field-msg error"></label>
+            </div>
+
+            <div class="form-group">
+                <label for="pw">密码</label>
+                <input type="password" id="pw" name="pw" required title="请输入密码"
+                    />
+                <label for="pw" class="field-msg error"></label>
+            </div>
+
+            <button type="submit" id="btn-login">登录</button>
+
+
+        </form>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="js/md5.min.js"></script>
+
+        <script type="text/javascript" src="js/login.js"></script>
+
+    </body>
+</html>
