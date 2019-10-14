@@ -1,3 +1,5 @@
+import { uglify } from 'rollup-plugin-uglify';
+
 export default [
 	{
 		input: 'js/user-list.js',
@@ -11,6 +13,7 @@ export default [
 		output: {
 			file: '../webroot/js/login.js',
 			format: 'iife'
-		}
+		},
+		plugins: [ uglify() ]
 	}
 ];
