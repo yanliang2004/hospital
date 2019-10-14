@@ -1,76 +1,129 @@
-import frmLogin from './login-form.js'
-import nonce from './login-nonce.js'
 
-function init() {
+// nonce: avoid replay attack: hash = md5(md5(uname:pw):nonce);
+var nonce = {
+    reset: function () {
+        return $.getJSON('getNonce.php');
+    }
+};
 
-    frmLogin.init();
+// 
+var frmLogin = function ($, md5) {
 
-    nonce.init();
+    var dom = {
+        $frm: $('#frm-login'),
+        $uname: $('#uname'),
+        $pw: $('#pw'),
+        $btnLogin: $('#btn-login')
+    };
 
-    $.when(frmLogin.deferred, nonce.deferred)
-        .done(tryLogin);
+    var validator = dom.$frm.validate({
+        success: 'valid',
+        submitHandler: submit
+    });
 
-}
+    var def;
 
-function tryLogin(userData, nonce) {
+    function submit() {
+        def && def.resolve({
+            uname: dom.$uname.val(),
+            pw: dom.$pw.val()
+        });
 
-    var loginHash = calcLoginHash(userData, nonce);
+    }
+
+
+    return {
+        reset: function () {
+            def = $.Deferred();
+
+            return def;
+        },
+
+        showErrors: function (errors) {
+            validator.showErrors(errors);
+        },
+
+        getUname: function () {
+            return $uname.val();
+        }
+    };
+
+}(jQuery, md5);
+
+
+!function () {
+
+    $.when(nonce.reset(), frmLogin.reset())
+        .done(function (arg1, arg2) {
+            login(arg1[0], arg2);
+        });
+
+}();
+
+function login(nonce, user) {
+    var loginHash = md5(md5(user.uname + ':' + user.pw) + nonce);
+
+    console.log(nonce, user);
 
     $.post(
         'login.php',
-        { uname: userData.uname, loginHash: loginHash },
+        { uname: user.uname, loginHash: loginHash },
         onLoginResult,
         'json'
     );
+
 }
 
-function calcLoginHash(userData, nonce) {
+function loginSuccess(uname) {
+    store.set('uname', uname);
 
-    var pwh = md5(userData.uname + ':' + userData.pw);
-
-    return md5(pwh + ':' + nonce);
-
+    location = 'user-admin.html';
 }
 
 
 function onLoginResult(data) {
 
-    console.log(data);
-
     switch (data.code) {
-        case 0:
 
-            location = 'user-list.html';
+        case 0: // login success:
+
+            loginSuccess(frmLogin.getUname());
 
             break;
 
-        case 1:
+        case 1: // validation failed
 
             frmLogin.showErrors(data.data);
 
             break;
 
-        case 2:
+        case 2: // no such user:
 
-            frmLogin.showErrors({ uname: data.data })
-
-            break;
-
-        case 3:
-
-            frmLogin.showErrors({ pw: data.data });
+            frmLogin.showErrors({
+                uname: data.data
+            });
 
             break;
 
-        case 5:
+        case 3: // wrong password:
 
-            frmLogin.showErrors({ uname: data.data });
+            frmLogin.showErrors({
+                pw: data.data
+            });
 
             break;
+
+        case 5: // db error:
+
+            frmLogin.showErrors({
+                frm: data.data
+            });
+
+            break;
+
     }
 
-    init();
 }
 
 
-init();
+

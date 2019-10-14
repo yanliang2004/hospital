@@ -62,7 +62,7 @@ class ValFilter
 
         array_walk($this->result, function ($value, $key) {
             if (!$value) {
-                $this->errMsgs[$key] = 
+                $this->errMsgs[$key] =
                     $this->opt[$key][1][null === $value ? 'empty' : 'invalid'];
             }
         });

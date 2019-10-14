@@ -1,1 +1,131 @@
-!function(){"use strict";var e=$("#frm-login"),r=$("#form-msg"),n=$("#uname"),o=$("#pw"),a=$("#btn-login"),s={init:function(){this.deferred=$.Deferred(),this.enable(),r.removeClass("error")},enable:function(){n.prop("disabled",!1),o.prop("disabled",!1),a.prop("disabled",!1)},disable:function(){n.prop("disabled",!0),o.prop("disabled",!0),a.prop("disabled",!0)},showErrors:function(e){i.showErrors(e)}},i=e.validate({success:"valid",submitHandler:function(){s.disable(),s.deferred.resolve({uname:n.val(),pw:o.val()})}}),d={init:function(){var r=this.deferred=$.Deferred();$.getJSON("getNonce.php",function(e){r.resolve(e)})}};function t(){s.init(),d.init(),$.when(s.deferred,d.deferred).done(l)}function l(e,r){var n=function(e,r){var n=md5(e.uname+":"+e.pw);return md5(n+":"+r)}(e,r);$.post("login.php",{uname:e.uname,loginHash:n},c,"json")}function c(e){switch(console.log(e),e.code){case 0:location="user-list.html";break;case 1:s.showErrors(e.data);break;case 2:s.showErrors({uname:e.data});break;case 3:s.showErrors({pw:e.data});break;case 5:s.showErrors({uname:e.data})}t()}t()}();
+
+(function () {
+    'use strict';
+
+    // nonce: avoid replay attack: hash = md5(md5(uname:pw):nonce);
+    var nonce = {
+        reset: function () {
+            return $.getJSON('getNonce.php');
+        }
+    };
+
+    // 
+    var frmLogin = function ($, md5) {
+
+        var dom = {
+            $frm: $('#frm-login'),
+            $uname: $('#uname'),
+            $pw: $('#pw'),
+            $btnLogin: $('#btn-login')
+        };
+
+        var validator = dom.$frm.validate({
+            success: 'valid',
+            submitHandler: submit
+        });
+
+        var def;
+
+        function submit() {
+            def && def.resolve({
+                uname: dom.$uname.val(),
+                pw: dom.$pw.val()
+            });
+
+        }
+
+
+        return {
+            reset: function () {
+                def = $.Deferred();
+
+                return def;
+            },
+
+            showErrors: function (errors) {
+                validator.showErrors(errors);
+            },
+
+            getUname: function () {
+                return $uname.val();
+            }
+        };
+
+    }(jQuery, md5);
+
+
+    !function () {
+
+        $.when(nonce.reset(), frmLogin.reset())
+            .done(function (arg1, arg2) {
+                login(arg1[0], arg2);
+            });
+
+    }();
+
+    function login(nonce, user) {
+        var loginHash = md5(md5(user.uname + ':' + user.pw) + nonce);
+
+        console.log(nonce, user);
+
+        $.post(
+            'login.php',
+            { uname: user.uname, loginHash: loginHash },
+            onLoginResult,
+            'json'
+        );
+
+    }
+
+    function loginSuccess(uname) {
+        store.set('uname', uname);
+
+        location = 'user-admin.html';
+    }
+
+
+    function onLoginResult(data) {
+
+        switch (data.code) {
+
+            case 0: // login success:
+
+                loginSuccess(frmLogin.getUname());
+
+                break;
+
+            case 1: // validation failed
+
+                frmLogin.showErrors(data.data);
+
+                break;
+
+            case 2: // no such user:
+
+                frmLogin.showErrors({
+                    uname: data.data
+                });
+
+                break;
+
+            case 3: // wrong password:
+
+                frmLogin.showErrors({
+                    pw: data.data
+                });
+
+                break;
+
+            case 5: // db error:
+
+                frmLogin.showErrors({
+                    frm: data.data
+                });
+
+                break;
+
+        }
+
+    }
+
+}());
